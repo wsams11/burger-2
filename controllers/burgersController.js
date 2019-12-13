@@ -1,7 +1,7 @@
 // require express, express route, burgers model file
 const express = require("express");
 const router = express.Router();
-const db= require("../models/burger.js");
+const db= require("../models/");
 
 // get route for home 
 
