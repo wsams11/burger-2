@@ -21,18 +21,30 @@ router.get("/burgers", function(req,res){
 // post route for /burgers/create
 
 router.post("/burgers/create", function(req,res){
-   db.Burger.create(req.body.burger_name, function(result){
-       res.redirect("/");
-   })
+    db.Burger.create({
+        burger_name: req.body.burger_name
+      }).then(function(dbBurger) {
+        console.log(dbBurger);
+        res.redirect("/");
+      });
 })
 
 
 // put route for /burgers/:id
-router.put("/burgers/:id", function(req,res){
-    db.Burger.update(req.params.id, function(result){
-        res.sendStatus(200);
-    })
- })
+router.put("/burgers/:id", function (req, res) {
+    db.Burger.update(
+        {
+            devoured: true
+        },
+        {
+            where: {
+                id: req.params.id
+            }
+        }
+    ).then(function (dbBurger) {
+        res.json("/");
+    });
+});
 
 
 // export router
